@@ -1,6 +1,6 @@
 use crate::{
     auth::{login, login_check, login_page, logout},
-    proxy::proxy_traffic,
+    proxy::{proxy_css, proxy_html},
 };
 use rocket_dyn_templates::Template;
 
@@ -20,7 +20,14 @@ fn rocket() -> _ {
         .attach(Template::fairing())
         .mount(
             "/",
-            routes![login_page, login, login_check, logout, proxy_traffic],
+            routes![
+                login_page,
+                login,
+                login_check,
+                logout,
+                proxy_html,
+                proxy_css
+            ],
         )
         .manage(db)
 }
