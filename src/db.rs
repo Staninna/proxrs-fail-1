@@ -77,7 +77,7 @@ impl Database {
         let mut rows = stmt.query([user.username.clone(), password.to_string()])?;
 
         // Check if the user exists
-        if let Some(_) = rows.next()? {
+        if (rows.next()?).is_some() {
             // Return true
             Ok(true)
         } else {
